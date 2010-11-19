@@ -19,4 +19,8 @@ class Questioner
     end
   end
   
+  def inquire_about_cheese
+    ask("Do you like cheese?") ? "Good, cheese is delicious!" : "WHAT!?? YOU DON'T LIKE CHEESE?"
+  end
+  
 end
