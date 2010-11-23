@@ -1,11 +1,33 @@
+require "stringio"
+
 class Questioner
   
   InvalidResponseError = Class.new(StandardError)
   
+  def initialize(input=STDIN,output=STDOUT)
+    @input = input
+    @output = output
+  end
+  
   def ask(question)
-    puts question
-    response = yes_or_no(gets.chomp)
+    @output.puts question
+    response = yes_or_no(@input.gets.chomp)
     response.nil? ? ask(question) : response
+  end
+  
+  def ask_and_return_response(question, options={})
+    raise ArgumentError unless !options[:on_yes].nil? && !options[:on_no].nil?
+    
+    @output.puts question
+    input = @input.gets
+    input.chomp if !input.nil?
+    begin
+      response = yes_or_no(input)
+    rescue InvalidResponseError # not interactive, so don't repeat the question
+      response = false
+    end
+    
+    response ? options[:on_yes] : options[:on_no]
   end
   
   def yes_or_no(response)
