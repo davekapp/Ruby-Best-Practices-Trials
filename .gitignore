@@ -1,0 +1,4 @@
+# ignore temp files left by some editors
+*.*~
+*~
+.bundle

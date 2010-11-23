@@ -1,4 +1,4 @@
-require "Test/Unit"
+require "test/unit"
 require "TestUnitExtensions.rb"
 
 require_relative "../Blaher.rb"
